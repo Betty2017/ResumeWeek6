@@ -76,11 +76,13 @@ public class MainController {
 			
 			if (action.equals("continue") && count < 10)
 			{
+			edu.setUsername(newUsername);
 			educationRepository.save(edu);
 					count ++ ;
 				return "redirect:/education";
 				
 			}
+			edu.setUsername(newUsername);
 			educationRepository.save(edu);
 			return "redirect:/experience";
 		
@@ -126,21 +128,15 @@ public class MainController {
 	
 	}
 			    
-/* @RequestMapping(value = "/display", method = RequestMethod.GET)
- 	public String DisplayAll( Model model)
- {
-     Iterable<PersonModel> person = personRepository.findAll();
-     Iterable<EducationModel> education = educationRepository.findAll();
-     Iterable<ExperianceModel> experiance = experianceRepository.findAll();
-     Iterable<SkillsModel> skills = skillRepository.findAll();
-     model.addAttribute("list", person);
-     model.addAttribute("education", education);
-     model.addAttribute("experiance", experiance);
-     model.addAttribute("skills", skills);
-     return "display";
- }
- 
- */
+	@RequestMapping(value = "/profile", method = RequestMethod.GET)
+    public String toSend( PersonModel person, Model model){
+
+        Iterable<PersonModel> perVal = personRepository.findByUsername(newUsername);
+        Iterable<EducationModel> eduVal = educationRepository.findByUsername(newUsername);
+        model.addAttribute("newValue1", perVal);
+        model.addAttribute("newValue2", eduVal);
+        return "profile";
+    }
    
     
 }

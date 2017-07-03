@@ -18,8 +18,15 @@ public class EducationModel {
 	private String degree; 
 	private String institution; 
 	private String year;
+	private String username;
 
 	
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
 	public Integer getEduId() {
 		return eduId;
 	}

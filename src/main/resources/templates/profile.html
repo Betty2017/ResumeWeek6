@@ -23,22 +23,25 @@
         <div class="container">
            
 
-            <table >
+           
+            
+             <div th:each="list : ${newValue1}">
+            
+                <p><h5 th:text = "${list.fname}">  </h5></p>
+                <p><h5 th:text = "${list.lname}">  </h5></p>
+                <p><h5 th:text = "${list.email}">  </h5></p><br/>
+             
+        </div>
+  
+  			<div th:each="list2 : ${newValue2}">
+            
+                <p><h5 th:text = "${list2.degree}">  </h5></p>
+                <p><h5 th:text = "${list2.institution}">  </h5></p>
+                <p><h5 th:text = "${list2.year}">  </h5></p><br/>
+             
+        </div>
 
-                <div th:each="person : ${list}">
-
-                    <tr>
-                        <td th:text = "${person.fname}"></td>
-                        <td th:text = "${person.lname}"></td>
-                      
-                    </tr>
-                    <tr>
-                       <td th:text = "${person.email}"></td>
-                       
-                    </tr>
-                </div>
-
-            </table>
+           
 
            
                 

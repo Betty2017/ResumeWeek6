@@ -16,8 +16,15 @@ public class ExperianceModel {
     private String startingYear;
     private String endYear;
     private String duty;
+    private String username;
    
     
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
 	public int getId() {
 		return id;
 	}
