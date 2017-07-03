@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org ">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Robo Resume</title>
+
+    <th:block th:replace="base :: head"></th:block>
+</head>
+<body>
+<th:block th:replace="base :: nav"></th:block>
+  
+  <div class="container">
+    <div class="jumbotron">
+        <div class="container">
+            <h3>Register Here</h3>
+            <form action="#" th:action="@{/createAcc}" th:object="${user}" method="post">
+                <div class="col-xs-4">
+                    <label for="FName">User Name</label>
+                    <input type="text"  th:field="*{username}" class="form-control" id="FName"  />
+                </div>
+                <div class="col-xs-4">
+                    <label for="Lname">Last Name</label>
+                    <input type="text" th:field="*{password}" class="form-control" id="Lname"  />
+                </div>
+                <div class="col-xs-4">
+                    <label for="role">User Type</label>
+                    <input type="radio" name="action" value="jobSeeker"/>  Job Seeker
+					<input type="radio" name="action" value="recruiter" />Recruiter
+                </div>
+                <button type="submit" class="btn btn-default">Register</button>
+            </form>
+        </div>
+    </div>
+</div><!-- /.container -->
+
+<th:block th:replace="base :: footlinks"></th:block>
+           
+  </body>
+</html>
+
+
+
+
+
+
