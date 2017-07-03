@@ -46,6 +46,10 @@ public class MainController {
         return "login";
     }
     
+    @RequestMapping("/home")
+    public String home(){
+        return "home";
+    }
     
     @RequestMapping(value ="/personForm", method= RequestMethod.GET)
 	public String registerForm(Model model ,PersonModel per) {
@@ -98,11 +102,13 @@ public class MainController {
 		
 		if (action.equals("continue") && count < 10)
 		{
+		exp.setUsername(newUsername);
 		experianceRepository.save(exp);
 				count ++ ;
 			return "redirect:/experience";
 			
 		}
+		exp.setUsername(newUsername);
 		experianceRepository.save(exp);
 		return "redirect:/skill";
 	
@@ -118,13 +124,14 @@ public class MainController {
 	   public String saveExp(@RequestParam String action,@ModelAttribute SkillsModel skill ,  Model Pmodel) {
 		if (action.equals("continue") && count < 20)
 		{
+		skill.setUsername(newUsername);
 		skillRepository.save(skill);
 				count ++ ;
 			return "redirect:/skill";
 			
 		}
 		skillRepository.save(skill);
-		return "redirect:/display";
+		return "redirect:/profile";
 	
 	}
 			    
@@ -133,9 +140,26 @@ public class MainController {
 
         Iterable<PersonModel> perVal = personRepository.findByUsername(newUsername);
         Iterable<EducationModel> eduVal = educationRepository.findByUsername(newUsername);
+        Iterable<ExperianceModel> expVal = experianceRepository.findByUsername(newUsername);
+        Iterable<SkillsModel> skillVal = skillRepository.findByUsername(newUsername);
         model.addAttribute("newValue1", perVal);
         model.addAttribute("newValue2", eduVal);
+        model.addAttribute("newValue3", expVal);
+        model.addAttribute("newValue4", skillVal);
         return "profile";
+    }
+	
+	@RequestMapping(value = "/search", method = RequestMethod.GET)
+    public String SearchByName(Model model){
+        model.addAttribute(new PersonModel());
+        return "search";
+    }
+    @RequestMapping(value = "/search", method = RequestMethod.POST)
+    public String SearchPostName(@ModelAttribute PersonModel person, Model model){
+        String nameSearch = person.getFname();
+        Iterable<PersonModel> newVal = personRepository.findByfname(nameSearch);
+        model.addAttribute("newValue", newVal);
+        return "display";
     }
    
     

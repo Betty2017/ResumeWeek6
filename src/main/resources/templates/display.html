@@ -24,21 +24,19 @@
           
             <table >
 
-                <div th:each="person : ${list}">
+                <div th:each="person : ${newValue}">
 
                     <tr>
-                        <td th:text = "${person.fname}"></td>
+                      <a href="/" ></a>  <td th:text = "${person.fname}"></td>
                         <td th:text = "${person.lname}"></td>
                       
                     </tr>
-                    <tr>
-                       <td th:text = "${person.email}"></td>
-                    </tr>
+                    
                 </div>
 
             </table>
 
-            <table class="table table-hover">
+           <!--  <table class="table table-hover">
 
                 <tr>
                     <th>Education</th>
@@ -104,7 +102,7 @@
                     </tr>
                 </div>
 
-            </table>
+            </table> -->
 
 
         </div>

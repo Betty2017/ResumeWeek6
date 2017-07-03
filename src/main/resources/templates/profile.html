@@ -27,23 +27,38 @@
             
              <div th:each="list : ${newValue1}">
             
-                <p><h5 th:text = "${list.fname}">  </h5></p>
-                <p><h5 th:text = "${list.lname}">  </h5></p>
+                <p><h5 th:text = "${list.fname}"> </h5> <h5 th:text = "${list.lname}">  </h5></p>
                 <p><h5 th:text = "${list.email}">  </h5></p><br/>
              
         </div>
-  
+  			<p><h4> Education </h4></p>
   			<div th:each="list2 : ${newValue2}">
             
                 <p><h5 th:text = "${list2.degree}">  </h5></p>
                 <p><h5 th:text = "${list2.institution}">  </h5></p>
                 <p><h5 th:text = "${list2.year}">  </h5></p><br/>
              
-        </div>
+      	   </div>
+      	   <p><h4> Experience </h4></p>
 
-           
-
-           
+           <div th:each="list3 : ${newValue3}">
+            
+                <p><h5 th:text = "${list3.company}">  </h5></p>
+                <p><h5 th:text = "${list3.position}">  </h5></p>
+                <p><h5 th:text = "${list3.startingYear}">  </h5></p>
+                <p><h5 th:text = "${list3.endYear}">  </h5></p>
+                <p><h5>Duty</h5><h5 th:text = "${list3.duty}">  </h5></p><br/>
+               
+             
+      	   </div>
+			<p><h4> Skills With Rating </h4></p>
+           <div th:each="list4 : ${newValue4}">
+            
+                <p><h5 th:text = "${list4.skills}">  </h5></p>
+                <p><h5 th:text = "${list4.rating}">  </h5></p><br/>
+                               
+             
+      	   </div>
                 
 
         </div>

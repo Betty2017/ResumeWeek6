@@ -14,7 +14,6 @@ VALUES (1, "123456", "bini");
 INSERT INTO user (enabled, password, username)
 VALUES (1, "123456", "beti");
 
-
 INSERT INTO role (role)
 VALUES ("user");
 INSERT INTO role (role)

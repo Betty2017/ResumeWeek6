@@ -13,6 +13,16 @@ public class SkillsModel {
 private Integer id;
 private String skills;
 private String rating;
+private String username;
+
+
+
+public String getUsername() {
+	return username;
+}
+public void setUsername(String username) {
+	this.username = username;
+}
 public Integer getId() {
 	return id;
 }
