@@ -22,15 +22,20 @@
 	
         <div class="container">
            
+					<table >
 
-           
-            
-             <div th:each="list : ${newValue1}">
-            
-                <p><h5 th:text = "${list.fname}"> </h5> <h5 th:text = "${list.lname}">  </h5></p>
-                <p><h5 th:text = "${list.email}">  </h5></p><br/>
-             
-        </div>
+               			 <div th:each="list : ${newValue1}">
+
+	                   		 <tr>
+	                    			<td th:text = "${list.fname}"></td>
+	                        		<td th:text = "${list.lname}">></td>                      
+	                    	</tr> 
+	                    	<tr>
+	                    			<td th:text = "${list.email}"></td> 
+	                    	</tr>                  
+              		 	</div>
+            		</table>
+			
   			<p><h4> Education </h4></p>
   			<div th:each="list2 : ${newValue2}">
             
