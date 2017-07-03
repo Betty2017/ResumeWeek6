@@ -1,6 +1,10 @@
 package resume;
 
+import java.security.Principal;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -18,6 +22,7 @@ import resume.SkillsModel;
 @Controller
 public class MainController {
 	int count=0;
+	String newUsername;
 	
 	@Autowired
     private UserRepository userRepository;
@@ -41,17 +46,20 @@ public class MainController {
         return "login";
     }
     
-       
+    
     @RequestMapping(value ="/personForm", method= RequestMethod.GET)
 	public String registerForm(Model model ,PersonModel per) {
+    Authentication aut= SecurityContextHolder.getContext().getAuthentication();
+    newUsername=aut.getName();
     model.addAttribute("per" , new PersonModel());
-			return "personForm";
+    System.out.println(newUsername);
+   			return "personForm";
 	}
     
-   
-    
+            
 	@RequestMapping(value ="/personForm", method= RequestMethod.POST)
-	 public String saveRegister(@ModelAttribute PersonModel per ) {
+	 public String saveRegister(@ModelAttribute PersonModel per,Principal p  ) {
+	per.setUsername(newUsername);
 	  personRepository.save(per);
 	 	return "redirect:/education";
 	}
@@ -118,7 +126,7 @@ public class MainController {
 	
 	}
 			    
- @RequestMapping(value = "/display", method = RequestMethod.GET)
+/* @RequestMapping(value = "/display", method = RequestMethod.GET)
  	public String DisplayAll( Model model)
  {
      Iterable<PersonModel> person = personRepository.findAll();
@@ -132,7 +140,8 @@ public class MainController {
      return "display";
  }
  
- 
+ */
+   
     
 }
 
