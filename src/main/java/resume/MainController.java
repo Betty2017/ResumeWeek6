@@ -135,7 +135,7 @@ public class MainController {
 	
 	}
 			    
-	@RequestMapping(value = "/profile", method = RequestMethod.GET)
+	@RequestMapping(value = "/profileDis", method = RequestMethod.GET)
     public String toSend( PersonModel person, Model model){
 
         Iterable<PersonModel> perVal = personRepository.findByUsername(newUsername);
