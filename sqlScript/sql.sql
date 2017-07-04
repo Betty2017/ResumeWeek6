@@ -15,9 +15,9 @@ INSERT INTO user (enabled, password, username)
 VALUES (1, "123456", "beti");
 
 INSERT INTO role (role)
-VALUES ("user");
+VALUES ("jobSeeker");
 INSERT INTO role (role)
-VALUES ("admin");
+VALUES ("recruiters");
 
 INSERT INTO user_roles (user_id,role_id)
 VALUES (2,2);

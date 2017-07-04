@@ -1,10 +1,15 @@
 package resume;
 
 import java.security.Principal;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -51,18 +56,34 @@ public class MainController {
         return "home";
     }
     
+    @RequestMapping(value="/logout",method= RequestMethod.GET)
+    public String logOut(HttpServletRequest request ,HttpServletResponse response){
+    Authentication aut= SecurityContextHolder.getContext().getAuthentication();
+    if(aut != null){
+    	new SecurityContextLogoutHandler().logout(request, response, aut);
+    }
+        return "redirect:/login";
+    }
+    
+    
     @RequestMapping(value ="/personForm", method= RequestMethod.GET)
 	public String registerForm(Model model ,PersonModel per) {
     Authentication aut= SecurityContextHolder.getContext().getAuthentication();
     newUsername=aut.getName();
     model.addAttribute("per" , new PersonModel());
     System.out.println(newUsername);
-   			return "personForm";
-	}
+    		return "personForm";
+    		
+   	}
     
-            
+           
 	@RequestMapping(value ="/personForm", method= RequestMethod.POST)
 	 public String saveRegister(@ModelAttribute PersonModel per,Principal p  ) {
+	List<PersonModel> getUsername = personRepository.findByUsername(newUsername);
+		if(getUsername != null)
+		{
+			return "redirect:/profile";
+		}
 	per.setUsername(newUsername);
 	  personRepository.save(per);
 	 	return "redirect:/education";
@@ -135,9 +156,9 @@ public class MainController {
 	
 	}
 			    
-	@RequestMapping(value = "/profileDis", method = RequestMethod.GET)
-    public String toSend( PersonModel person, Model model){
-
+	@RequestMapping(value = "/profile", method = RequestMethod.GET)
+    public String toSend( PersonModel person, Model model, Principal p){
+		newUsername= p.getName();
         Iterable<PersonModel> perVal = personRepository.findByUsername(newUsername);
         Iterable<EducationModel> eduVal = educationRepository.findByUsername(newUsername);
         Iterable<ExperianceModel> expVal = experianceRepository.findByUsername(newUsername);
@@ -149,6 +170,7 @@ public class MainController {
         return "profile";
     }
 	
+		
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
     public String SearchByName(Model model){
         model.addAttribute(new PersonModel());
@@ -157,9 +179,11 @@ public class MainController {
     @RequestMapping(value = "/search", method = RequestMethod.POST)
     public String SearchPostName(@ModelAttribute PersonModel person, Model model){
         String nameSearch = person.getFname();
-        Iterable<PersonModel> newVal = personRepository.findByfname(nameSearch);
-        model.addAttribute("newValue", newVal);
-        return "display";
+        Iterable<PersonModel> perVal = personRepository.findByfname(nameSearch);
+        model.addAttribute("newValue1", perVal);
+        
+       
+        return "profile";
     }
    
     

@@ -27,8 +27,10 @@
                 <div th:each="person : ${newValue}">
 
                     <tr>
-                      <a href="/" ></a>  <td th:text = "${person.fname}"></td>
+                    	
+                        <td th:text = "${person.fname}"></td>
                         <td th:text = "${person.lname}"></td>
+                        <td th:text = "${person.email}"></td>
                       
                     </tr>
                     
