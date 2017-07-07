@@ -197,6 +197,7 @@ public class MainController {
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
     public String SearchByName(Model model){
         model.addAttribute(new PersonModel());
+        model.addAttribute(new ExperianceModel());
         return "search";
     }
     @RequestMapping(value = "/search", method = RequestMethod.POST)
@@ -208,19 +209,19 @@ public class MainController {
     }
     
    
-    
-   /* @RequestMapping(value = "/search", method = RequestMethod.GET)
+   /* 
+    @RequestMapping(value = "/search", method = RequestMethod.GET)
     public String SearchByCompany(Model model){
         model.addAttribute(new ExperianceModel());
         return "search";
-    }
-    @RequestMapping(value = "/search", method = RequestMethod.POST)
+    }*/
+    @RequestMapping(value = "/searchCompany", method = RequestMethod.POST)
     public String SearchPostName(@ModelAttribute ExperianceModel exp, Model model){
         String companySearch = exp.getCompany();
         Iterable<ExperianceModel> perVal = experianceRepository.findByCompany(companySearch);
         model.addAttribute("newValue1", perVal);
        return "listCompanies";
-    }*/
+    }
    
        
     @RequestMapping(value = "/view/{username}", method = RequestMethod.GET)
