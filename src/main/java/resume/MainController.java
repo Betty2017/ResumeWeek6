@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -12,6 +13,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,6 +28,12 @@ import resume.SkillsModel;
 
 @Controller
 public class MainController {
+	@Autowired
+    private UserValidator userValidator;
+
+    @Autowired
+    private UserService userService;
+    
 	int count=0;
 	String newUsername;
 	
@@ -229,7 +237,38 @@ public class MainController {
     	
         
         return "profile";
-        
-        
+             
     }
+    
+    
+    @RequestMapping(value="/register", method = RequestMethod.GET)
+    public String showRegistrationPage(Model model){
+        model.addAttribute("user", new User());
+        return "registration";
+    }
+
+    @RequestMapping(value="/register", method = RequestMethod.POST)
+    public String processRegistrationPage(@Valid @ModelAttribute("user") User user, BindingResult result, Model model){
+
+        model.addAttribute("user", user);
+        userValidator.validate(user, result);
+
+        if (result.hasErrors()) {
+            return "registration";
+        } else {
+            userService.saveUser(user);
+            model.addAttribute("message", "User Account Successfully Created");
+        }
+
+        return "index";
+    }
+
+    public UserValidator getUserValidator() {
+        return userValidator;
+    }
+
+    public void setUserValidator(UserValidator userValidator) {
+        this.userValidator = userValidator;
+    }
+
 }
