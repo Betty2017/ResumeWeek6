@@ -51,7 +51,7 @@ public class MainController {
 
     @RequestMapping("/")
     public String index(){
-        return "login";
+        return "home";
     }
 
     @RequestMapping("/login")
@@ -243,8 +243,9 @@ public class MainController {
     
     
     @RequestMapping(value="/register", method = RequestMethod.GET)
-    public String showRegistrationPage(Model model){
+    public String showRegistrationPage(Model model, Model rmodel){
         model.addAttribute("user", new User());
+        rmodel.addAttribute("role", new Role());
         return "registration";
     }
 
@@ -258,6 +259,28 @@ public class MainController {
             return "registration";
         } else {
             userService.saveUser(user);
+            model.addAttribute("message", "User Account Successfully Created");
+        }
+
+        return "home";
+    }
+    
+    @RequestMapping(value="/registerRec", method = RequestMethod.GET)
+    public String showRegistrationPage(Model model){
+        model.addAttribute("user", new User());
+        return "registrationRec";
+    }
+
+    @RequestMapping(value="/registerRec", method = RequestMethod.POST)
+    public String processRegistrationRec(@Valid @ModelAttribute("user") User user, BindingResult result, Model model){
+
+        model.addAttribute("user", user);
+        userValidator.validate(user, result);
+
+        if (result.hasErrors()) {
+            return "registration";
+        } else {
+            userService.saveAdmin(user);
             model.addAttribute("message", "User Account Successfully Created");
         }
 

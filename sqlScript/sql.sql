@@ -1,9 +1,9 @@
-create schema secbones;
+create schema betidb_resume;
 
 create user 'springuser'@'localhost' identified by 'ThePassword';
 grant all on secbones.* to 'springuser'@'localhost';
 
-use secbones;
+use betidb_resume;
 
 select * from user;
 select * from role;

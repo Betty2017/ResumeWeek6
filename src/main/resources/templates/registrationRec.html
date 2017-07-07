@@ -14,10 +14,10 @@
 
 <div class="container">
     <br /><br /><br />
-    <h4>New User Registration</h4>
+    <h4>Recruiter Registration Page</h4>
 
 
-<form autocomplete="off" action="#" th:action="@{/register}" th:object="${user}" method="post">
+<form autocomplete="off" action="#" th:action="@{/registerRec}" th:object="${user}" method="post">
         <div><label> First Name :<span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First Name Error</span> 
         			 <input type="text" class="form-control" id="firstName" placeholder="First Name" th:field="*{firstName}" /> </label></div>
         <div><label> Last Name : <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Last Name Error</span> 
@@ -28,7 +28,6 @@
         			 <input type="text" class="form-control" id="username" placeholder="Username" th:field="*{username}" /></label></div>
         <div><label> Password :<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</span> 
         			 <input type="text" class="form-control" id="password" placeholder="Password" th:field="*{password}" /></label></div>
-        
         <div><button type="submit" class="btn btn-default">Submit</button></div>
         
     </form>
