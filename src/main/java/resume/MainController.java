@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -221,6 +222,7 @@ public class MainController {
         
         return "listNames";
     }
+    */
     
     @RequestMapping(value = "/searchCompany", method = RequestMethod.GET)
     public String SearchByComp(Model model){
@@ -235,14 +237,25 @@ public class MainController {
         
         return "listNames";
     }
-   */
+   
        
-    @RequestMapping(value = "/view", method = RequestMethod.GET)
-    public String View(@ModelAttribute PersonModel person, Model model, @RequestParam String username){
+    @RequestMapping(value = "/view/{username}", method = RequestMethod.GET)
+    public String View(@PathVariable(value ="username") String username, PersonModel person, Model model){
     	String UM = person.getUsername();
-    	System.out.println(UM);
- 
-        return "profile";
+    	System.out.println(username);
+    	 Iterable<PersonModel> perVal = personRepository.findByUsername(UM);
+         Iterable<EducationModel> eduVal = educationRepository.findByUsername(UM);
+         Iterable<ExperianceModel> expVal = experianceRepository.findByUsername(UM);
+         Iterable<SkillsModel> skillVal = skillRepository.findByUsername(UM);
+         
+         model.addAttribute("newValue1", perVal);
+         model.addAttribute("newValue2", eduVal);
+         model.addAttribute("newValue3", expVal);
+         model.addAttribute("newValue4", skillVal);
+         
+         return "profile";
+
+        
              
     }
     

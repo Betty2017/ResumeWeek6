@@ -18,6 +18,7 @@
         <h5>List Names</h5>
     </div>
     <br /><br />
+    
     <table class="table table-striped">
         <tr>
             <th>First Name</th>
@@ -31,8 +32,9 @@
             <td th:text="${list.lname}"></td>
             <td th:text="${list.email}"></td>
             <td th:text="${list.username}"></td>
-            <td><a href="/UnderConstraction" >View Profile</a> </td> 
+            <td><a th:href="@{/view/{username} (username = ${list.username})}" >View Profile</a> </td> 
         </tr>
+        
     </table>
 </div>
 
