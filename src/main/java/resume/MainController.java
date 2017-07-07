@@ -207,14 +207,15 @@ public class MainController {
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
     public String SearchByName(Model model){
         model.addAttribute(new PersonModel());
-        model.addAttribute(new ExperianceModel());
         return "search";
     }
     @RequestMapping(value = "/search", method = RequestMethod.POST)
-    public String SearchPostName(@ModelAttribute PersonModel person, Model model, Principal pri){
+    public String SearchPostName(@ModelAttribute PersonModel person, Model model){
         String nameSearch = person.getFname();
         Iterable<PersonModel> perVal = personRepository.findByfname(nameSearch);
         model.addAttribute("newValue1", perVal);
+        
+        System.out.println(person.getUsername());
         return "listNames";
     }
     
@@ -231,9 +232,12 @@ public class MainController {
         
         return "listNames";
     }
-    */
     
-    
+    @RequestMapping(value = "/searchCompany", method = RequestMethod.GET)
+    public String SearchByComp(Model model){
+        model.addAttribute(new ExperianceModel());
+        return "search";
+    }
     @RequestMapping(value = "/searchCompany", method = RequestMethod.POST)
     public String SearchPostCompany(@ModelAttribute ExperianceModel exp, Model model){
        String company = exp.getCompany();
@@ -242,17 +246,7 @@ public class MainController {
         
         return "listNames";
     }
-   
-    @RequestMapping(value = "/searchSchool", method = RequestMethod.POST)
-    public String SearchPostSchool(@ModelAttribute EducationModel edu, Model model){
-       String school = edu.getInstitution();
-        Iterable<ExperianceModel> perVal = experianceRepository.findByCompany(school);
-        model.addAttribute("newValue1", perVal);
-        
-        return "listNames";
-    }
-   
-    
+   */
        
     @RequestMapping(value = "/view", method = RequestMethod.GET)
     public String View(@ModelAttribute PersonModel person, Model model, @RequestParam String username){
