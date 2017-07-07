@@ -80,8 +80,7 @@ public class MainController {
     Authentication aut= SecurityContextHolder.getContext().getAuthentication();
     newUsername=aut.getName();
     model.addAttribute("per" , new PersonModel());
-    //System.out.println(newUsername);
-    		return "personForm";
+       		return "personForm";
     		
    	}
                

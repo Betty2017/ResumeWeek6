@@ -26,21 +26,16 @@
     </form>
     </div>
        <br/>
-    <!--  <div>
-    <form th:action="@{/searchlast}" th:object="${personlast}" method="post">
-        <div><label>  <input type="text" class="form-control" placeholder="Search by Last Name"> </label></div>
-     		<button type="submit" class="btn btn-default">Submit</button>
+    <div sec:authorize="hasAuthority('ADMIN')">
+     <form th:action="@{/searchCompany}" th:object="${company}" method="post">
+        <div><label>Search by Company : <input type="text" name="fname"/> </label></div>
+        <div><button type="submit" class="btn btn-default">Search</button></div>
+      
     </form>
     </div>
-    <br/>-->
-     <div sec:authorize="hasAuthority('ADMIN')">
-    <form th:action="@{/searchCompany}" th:object="${company}" method="post">
-        <div><label>  <input type="text" class="form-control" placeholder="Search by Company"> </label></div>
-     		<button type="submit" class="btn btn-default">Submit</button>
-    </form>
-    </div> 
-     
-   
+       <br/>
+    
+        
 </div><!-- /.container -->
 
 <th:block th:replace="base :: footlinks"></th:block>
