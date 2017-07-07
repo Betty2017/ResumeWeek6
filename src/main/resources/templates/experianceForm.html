@@ -16,7 +16,7 @@
     <div class="starter-template">
         <h1>Robo Resume</h1>
      </div>
-    <form th:action="@{/experianceForm}" th:object="${exp}" method="post">
+    <form th:action="@{/addExperianceForm}" th:object="${exp}" method="post">
         <div><label>Company: <input type="text" th:field="*{company}" /> </label></div>
         <div><label>Position: <input type="text" th:field="*{position}" /> </label></div>
         <div><label>Starting Year <input type="text" th:field="*{startingYear}" /></label></div>

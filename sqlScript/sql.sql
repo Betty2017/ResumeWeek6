@@ -4,20 +4,22 @@ create user 'springuser'@'localhost' identified by 'ThePassword';
 grant all on secbones.* to 'springuser'@'localhost';
 
 use betidb_resume;
+describe user;
+
 
 select * from user;
 select * from role;
 select * from user_roles;
 
-INSERT INTO user (enabled, password, username)
-VALUES (1, "123456", "bini");
-INSERT INTO user (enabled, password, username)
-VALUES (1, "123456", "beti");
+INSERT INTO user (email,enabled,first_name,last_name, password, username )
+VALUES ("beti@gmail.com",1,"beti","beti" ,"password", "beti");
+INSERT INTO user (email,enabled,first_name,last_name, password, username )
+VALUES ("bini@gmail.com",1,"bini","bini" ,"password", "bini");
 
 INSERT INTO role (role)
-VALUES ("jobSeeker");
+VALUES ("ADMIN");
 INSERT INTO role (role)
-VALUES ("recruiters");
+VALUES ("USER");
 
 INSERT INTO user_roles (user_id,role_id)
 VALUES (2,2);
@@ -25,8 +27,8 @@ INSERT INTO user_roles (user_id,role_id)
 VALUES (1,1);
 
 
-DELETE FROM person_table
-WHERE email='negatu@gmail.com';
+DELETE FROM user
+WHERE email='beti@gmail.com';
 Commit;
 
 

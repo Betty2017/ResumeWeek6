@@ -1,4 +1,4 @@
-package resume;
+/*package resume;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +32,7 @@ public class DataLoader implements CommandLineRunner{
         user.setRoles(Arrays.asList(userRole));
         userRepository.save(user);
 
-        user = new User("jim@jim.com","jim","Jim","Jimmerson", true, "jim");
+        user = new User("bini@gmail.com","password","bini","bini", true, "bini");
         user.setRoles(Arrays.asList(userRole));
         userRepository.save(user);
 
@@ -46,3 +46,4 @@ public class DataLoader implements CommandLineRunner{
 
     }
 }
+*/

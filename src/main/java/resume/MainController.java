@@ -76,24 +76,18 @@ public class MainController {
     
     
     @RequestMapping(value ="/addPerson", method= RequestMethod.GET)
-	public String registerForm(Model model ,PersonModel per) {
+	public String registerForm(Model model ,PersonModel per, User user) {
     Authentication aut= SecurityContextHolder.getContext().getAuthentication();
     newUsername=aut.getName();
     model.addAttribute("per" , new PersonModel());
-    System.out.println(newUsername);
+    //System.out.println(newUsername);
     		return "personForm";
     		
    	}
-    
-           
+               
 	@RequestMapping(value ="/addPerson", method= RequestMethod.POST)
 	 public String saveRegister(@ModelAttribute PersonModel per,Principal p  ) {
-	List<PersonModel> getUsername = personRepository.findByUsername(newUsername);
-		if(getUsername != null)
-		{
-			return "redirect:/profile";
-		}
-	per.setUsername(newUsername);
+		per.setUsername(newUsername);
 	  personRepository.save(per);
 	 	return "redirect:/addEducation";
 	}
@@ -205,13 +199,7 @@ public class MainController {
 		
 	}
 	
-	@RequestMapping("/update/{username}")
-    public String editProfile(@PathVariable("username")String username, Model model){
-        Iterable<PersonModel> perVal = personRepository.findByUsername(newUsername);
-        perVal = personRepository.findByUsername(username);
-        model.addAttribute("person", perVal);
-        return "personForm";
-    }
+	
 	*/
 	
 	
@@ -219,24 +207,58 @@ public class MainController {
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
     public String SearchByName(Model model){
         model.addAttribute(new PersonModel());
+        model.addAttribute(new ExperianceModel());
         return "search";
     }
     @RequestMapping(value = "/search", method = RequestMethod.POST)
-    public String SearchPostName(@ModelAttribute PersonModel person, Model model){
+    public String SearchPostName(@ModelAttribute PersonModel person, Model model, Principal pri){
         String nameSearch = person.getFname();
         Iterable<PersonModel> perVal = personRepository.findByfname(nameSearch);
+        model.addAttribute("newValue1", perVal);
+        return "listNames";
+    }
+    
+   /* @RequestMapping(value = "/searchlast", method = RequestMethod.GET)
+    public String SearchByLast(Model model){
+        model.addAttribute(new PersonModel());
+        return "search";
+    }
+    @RequestMapping(value = "/searchlast", method = RequestMethod.POST)
+    public String SearchPostLast(@ModelAttribute PersonModel person, Model model){
+        String nameSearch = person.getLname();
+        Iterable<PersonModel> perVal = personRepository.findBylname(nameSearch);
+        model.addAttribute("newValue1", perVal);
+        
+        return "listNames";
+    }
+    */
+    
+    
+    @RequestMapping(value = "/searchCompany", method = RequestMethod.POST)
+    public String SearchPostCompany(@ModelAttribute ExperianceModel exp, Model model){
+       String company = exp.getCompany();
+        Iterable<ExperianceModel> perVal = experianceRepository.findByCompany(company);
         model.addAttribute("newValue1", perVal);
         
         return "listNames";
     }
    
+    @RequestMapping(value = "/searchSchool", method = RequestMethod.POST)
+    public String SearchPostSchool(@ModelAttribute EducationModel edu, Model model){
+       String school = edu.getInstitution();
+        Iterable<ExperianceModel> perVal = experianceRepository.findByCompany(school);
+        model.addAttribute("newValue1", perVal);
+        
+        return "listNames";
+    }
+   
+    
        
     @RequestMapping(value = "/view", method = RequestMethod.GET)
     public String View(@ModelAttribute PersonModel person, Model model, @RequestParam String username){
     	String UM = person.getUsername();
     	System.out.println(UM);
-    	
-        
+ 
         return "profile";
              
     }
