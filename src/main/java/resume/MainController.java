@@ -188,17 +188,7 @@ public class MainController {
 				return "personFormUpdate";
 	    }
 
-	@RequestMapping(value ="/personFormUpdate", method= RequestMethod.POST)
-	   public String updatePer(@ModelAttribute PersonModel updatePer , @RequestParam String username, Model Pmodel) {
-		Iterable<PersonModel> perVal = (Iterable<PersonModel>) personRepository.findByUsername(updatePer.getUsername());
-		perVal.setUsername(username);
-		//PersonModel perVal = (Iterable<PersonModel>) personRepository.findByUsername(updatePer.getUsername());
-		personRepository.save(updatePer);
-			return "redirect:/education";
 		
-	}
-	
-	
 	*/
 	
 	
