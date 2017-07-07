@@ -51,7 +51,7 @@ public class MainController {
 
     @RequestMapping("/")
     public String index(){
-        return "home";
+        return "login";
     }
 
     @RequestMapping("/login")
@@ -63,6 +63,7 @@ public class MainController {
     public String home(){
         return "home";
     }
+   
     
     @RequestMapping(value="/logout",method= RequestMethod.GET)
     public String logOut(HttpServletRequest request ,HttpServletResponse response){
@@ -260,7 +261,7 @@ public class MainController {
             model.addAttribute("message", "User Account Successfully Created");
         }
 
-        return "index";
+        return "home";
     }
 
     public UserValidator getUserValidator() {

@@ -1,9 +1,9 @@
-create schema betidb_resume;
+create schema secbones;
 
 create user 'springuser'@'localhost' identified by 'ThePassword';
-grant all on betidb_resume.* to 'springuser'@'localhost';
+grant all on secbones.* to 'springuser'@'localhost';
 
-use betidb_resume;
+use secbones;
 
 select * from user;
 select * from role;
@@ -23,6 +23,12 @@ INSERT INTO user_roles (user_id,role_id)
 VALUES (2,2);
 INSERT INTO user_roles (user_id,role_id)
 VALUES (1,1);
+
+
+DELETE FROM person_table
+WHERE email='negatu@gmail.com';
+Commit;
+
 
 select * from person_table;
 select * from education_table;

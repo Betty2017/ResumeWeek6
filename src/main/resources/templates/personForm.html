@@ -18,7 +18,7 @@
         
     </div>
 		     
-    <form action="#" th:action="@{/personForm}" th:object="${per}" method="post">
+    <form action="#" th:action="@{/addPerson}" th:object="${per}" method="post">
         <div><label>First Name: <input type="text" th:field="*{fname}" /> </label></div>
         <div><label> Last Name: <input type="text" th:field="*{lname}" /> </label></div>
         <div><label>Email: <input type="text" th:field="*{email}" /> </label></div>

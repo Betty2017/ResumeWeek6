@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="www.thymeleaf.org ">
+<html lang="en" xmlns:th="www.thymeleaf.org " xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -36,7 +36,7 @@
                     <li><a href="/profile">Show Profile</a></li>
                     <li><a href="/search">Search</a></li>
                     <li><a href="/logout">Log out</a></li>
-                    
+                    <li>Hello,<span sec:authentication="name">Bob</span></li>
                     
                 </ul>
                 
