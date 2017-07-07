@@ -204,45 +204,49 @@ public class MainController {
         String nameSearch = person.getFname();
         Iterable<PersonModel> perVal = personRepository.findByfname(nameSearch);
         model.addAttribute("newValue1", perVal);
-        
-        System.out.println(person.getUsername());
-        return "listNames";
+       return "listNames";
     }
     
-   /* @RequestMapping(value = "/searchlast", method = RequestMethod.GET)
-    public String SearchByLast(Model model){
-        model.addAttribute(new PersonModel());
-        return "search";
-    }
-    @RequestMapping(value = "/searchlast", method = RequestMethod.POST)
-    public String SearchPostLast(@ModelAttribute PersonModel person, Model model){
-        String nameSearch = person.getLname();
-        Iterable<PersonModel> perVal = personRepository.findBylname(nameSearch);
-        model.addAttribute("newValue1", perVal);
-        
-        return "listNames";
-    }
-    */
+   
     
-    @RequestMapping(value = "/searchCompany", method = RequestMethod.GET)
-    public String SearchByComp(Model model){
+   /* @RequestMapping(value = "/search", method = RequestMethod.GET)
+    public String SearchByCompany(Model model){
         model.addAttribute(new ExperianceModel());
         return "search";
     }
-    @RequestMapping(value = "/searchCompany", method = RequestMethod.POST)
-    public String SearchPostCompany(@ModelAttribute ExperianceModel exp, Model model){
-       String company = exp.getCompany();
-        Iterable<ExperianceModel> perVal = experianceRepository.findByCompany(company);
+    @RequestMapping(value = "/search", method = RequestMethod.POST)
+    public String SearchPostName(@ModelAttribute ExperianceModel exp, Model model){
+        String companySearch = exp.getCompany();
+        Iterable<ExperianceModel> perVal = experianceRepository.findByCompany(companySearch);
         model.addAttribute("newValue1", perVal);
-        
-        return "listNames";
-    }
+       return "listCompanies";
+    }*/
    
        
     @RequestMapping(value = "/view/{username}", method = RequestMethod.GET)
-    public String View(@PathVariable(value ="username") String username, PersonModel person, Model model){
+    public String View(@PathVariable(value ="username") String username, ExperianceModel exp, Model model){
+    	String UM = exp.getUsername();
+    	System.out.println("profile" + username);
+    	 Iterable<PersonModel> perVal = personRepository.findByUsername(UM);
+         Iterable<EducationModel> eduVal = educationRepository.findByUsername(UM);
+         Iterable<ExperianceModel> expVal = experianceRepository.findByUsername(UM);
+         Iterable<SkillsModel> skillVal = skillRepository.findByUsername(UM);
+         
+         model.addAttribute("newValue1", perVal);
+         model.addAttribute("newValue2", eduVal);
+         model.addAttribute("newValue3", expVal);
+         model.addAttribute("newValue4", skillVal);
+         
+         return "profile";
+
+        
+             
+    }
+    
+    @RequestMapping(value = "/viewCompany/{username}", method = RequestMethod.GET)
+    public String viewCompany(@PathVariable(value ="username") String username, PersonModel person, Model model){
     	String UM = person.getUsername();
-    	System.out.println(username);
+    	System.out.println("profile" + username);
     	 Iterable<PersonModel> perVal = personRepository.findByUsername(UM);
          Iterable<EducationModel> eduVal = educationRepository.findByUsername(UM);
          Iterable<ExperianceModel> expVal = experianceRepository.findByUsername(UM);
