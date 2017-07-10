@@ -1,7 +1,7 @@
 package resume;
 
 import java.security.Principal;
-import java.util.List;
+
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -48,6 +48,8 @@ public class MainController {
     private ExperianceRepository experianceRepository;
 	@Autowired
     private SkillRepository skillRepository;
+	@Autowired
+    private JobRepository jobRepository;
 	
 
     @RequestMapping("/")
@@ -208,13 +210,33 @@ public class MainController {
        return "listNames";
     }
     
-   
-   /* 
-    @RequestMapping(value = "/search", method = RequestMethod.GET)
-    public String SearchByCompany(Model model){
-        model.addAttribute(new ExperianceModel());
-        return "search";
-    }*/
+  
+    
+    @RequestMapping(value ="/jobpost", method= RequestMethod.GET)
+	public String aaaForm(Model model ,JobModel job) {
+    model.addAttribute("job" , new JobModel());
+       		return "jobposting";
+    		
+   	}
+               
+	@RequestMapping(value ="/postjob", method= RequestMethod.POST)
+	 public String jobPost(@ModelAttribute JobModel job,Principal p  ) {
+		job.setUsername(p.getName());
+		System.out.println(p.getName());
+	   jobRepository.save(job);
+	 	return "redirect:/joblist";
+	}
+	
+	 @RequestMapping(value = "/joblist", method = RequestMethod.GET)
+	    public String List(Model model, JobModel job,Principal p){
+			newUsername= p.getName();
+	        Iterable<JobModel> perVal = jobRepository.findByUsername(newUsername);
+	         model.addAttribute("newValue", perVal);
+	         return "joblist";
+    	             
+	}
+  
+    
     @RequestMapping(value = "/searchCompany", method = RequestMethod.POST)
     public String SearchPostName(@ModelAttribute ExperianceModel exp, Model model){
         String companySearch = exp.getCompany();
